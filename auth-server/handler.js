@@ -1,6 +1,8 @@
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
+
+// pass headers into each response to allow access
 const headers = { "Access-Control-Allow-Origin": "*" }; 
 
 /**
@@ -11,7 +13,8 @@ const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
 /**
  * Credentials are those values required to get access to your calendar. If you see “process.env” this means
- * the value is in the “config.json” file. This is a best practice as it keeps your API secrets hidden. Please remember to add “config.json” to your “.gitignore” file.
+ * the value is in the “config.json” file. This is a best practice as it keeps your API secrets hidden.  
+ * ------------ KEEP “config.json” to your “.gitignore” file. -----------------------------
  */
 const credentials = {
   client_id: process.env.CLIENT_ID,
@@ -52,10 +55,8 @@ module.exports.getAuthURL = async () => {
   });
 
   return {
+    headers,
     statusCode: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
     body: JSON.stringify({
       authUrl: authUrl,
     }),
@@ -63,13 +64,12 @@ module.exports.getAuthURL = async () => {
 };
 
 module.exports.getAccessToken = async (event) => {
-  // The values used to instatiate the OAuthClient are at the top of the file
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
   );
-  // Decode authorization code extracted from the URL query
+
   const code = decodeURIComponent(`${event.pathParameters.code}`);
 
   return new Promise((resolve, reject) => {
@@ -111,7 +111,6 @@ module.exports.getCalendarEvents = async (event) => {
 
   const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
   oAuth2Client.setCredentials({ access_token });
-
 
   return new Promise((resolve, reject) => {
     calendar.events.list(
