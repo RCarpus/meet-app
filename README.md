@@ -5,7 +5,7 @@
 ### FEATURE 1: FILTER EVENTS BY CITY
 **User Story**: As a user, I should be able to filter the events by city so that I can see the list of events that take place near that city.  
 
-**Scenario 1**: Given the user hasn’t searched for any city, when the user opens the app, then the user should see a list of all upcoming events.  
+**Scenario 1**: Given the main page is open, when the user has not clicked on an event, then the user should see a list of all upcoming events.  
 
 **Scenario 2**: Given the main page is open, when the user starts typing in the city textbox, then the user should see a list of cities (suggestions) that match what they’ve typed.  
 
@@ -37,4 +37,4 @@ User Story: As a user, I should be able to hide or show event details so that I 
 ### FEATURE 5: DATA VISUALIZATION
 **User Story**: As a user, I should be able to see a chart showing the number and type of upcoming events in each city so that I can see what types of events are happening in each city.
 
-**Scenario 1**: Given that the user has performed a successful search query, when the main page is loaded, the user should see a pie chart displaying the types of events and a bar chart displaying the number of events in each city.
+**Scenario 1**: Given that the main page is open, when the user wants to see the upcoming events by city, the user should see a pie chart displaying the types of events and a bar chart displaying the number of events in each city.
