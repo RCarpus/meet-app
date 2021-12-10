@@ -5,7 +5,7 @@
 ### FEATURE 1: FILTER EVENTS BY CITY
 **User Story**: As a user, I should be able to filter the events by city so that I can see the list of events that take place near that city.  
 
-**Scenario 1**: Given the main page is open, when the user has not clicked on an event, then the user should see a list of all upcoming events.  
+**Scenario 1**: Given the user hasn’t searched for any city, when the user opens the app, then the user should see a list of all upcoming events. 
 
 **Scenario 2**: Given the main page is open, when the user starts typing in the city textbox, then the user should see a list of cities (suggestions) that match what they’ve typed.  
 
@@ -14,7 +14,7 @@
 ### FEATURE 2: SHOW/HIDE AN EVENT’S DETAILS
 User Story: As a user, I should be able to hide or show event details so that I can see more or less about an event.  
 
-**Scenario 1**: Given that an event element is collapsed by default after loading data, when the user initially loads the data, each event element should be collapsed.  
+**Scenario 1**: Given that the main page is open, when the user has not clicked on an event, each event element should be collapsed.  
 
 **Scenario 2**: Given that an event element is collapsed, when the user clicks on an event, the event element should expand.  
 
