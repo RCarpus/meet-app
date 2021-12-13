@@ -124,11 +124,13 @@ describe('<CitySearch /> component', () => {
     expect(EventWrapper.find('.event__details-button').text()).toBe('Hide details');
   })
 
-  test('The text of the event details button changes to "Show details" after clicking button to hide event', () => {
+  test('The text of the event details button changes to "More details" after clicking button to hide event', () => {
+    EventWrapper.setState({expanded: false});
     const detailsButton = EventWrapper.find('.event__details-button').first();
     detailsButton.at(0).simulate('click');
     detailsButton.at(0).simulate('click');
-    expect(EventWrapper.find('.event__details-button').text()).toBe('Show details');
+
+    expect(EventWrapper.find('.event__details-button').text()).toBe('More details');
   })
 
 
