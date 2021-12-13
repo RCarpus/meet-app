@@ -37,7 +37,7 @@ class Event extends Component {
           <div className='event__more-details' >
             <h3 className='event__more-details__about-label'>About event</h3>
             <p className='event__more-details__link-line'>
-              <a className='event__more-details__link-line__link'>{event.htmlLink}</a>
+              <a className='event__more-details__link-line__link' href={event.htmlLink} >{event.htmlLink}</a>
             </p>
             <p className='event__more-details__description'>{event.description}</p>
           </div>
