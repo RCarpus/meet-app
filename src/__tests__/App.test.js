@@ -98,9 +98,9 @@ describe('<App /> integration', () => {
   test('When the number of events field changes, the number of events changes', async () => {
     const AppWrapper = mount(<App />);
     const numberInput = AppWrapper.find(NumberOfEvents).find('#number-of-events__input');
-    const eventObject = { target: { value: '1' } };
+    const eventObject = { target: { value: '2' } };
     await numberInput.at(0).simulate('change', eventObject);
-    expect(AppWrapper.state('events')).toHaveLength(1);
+    expect(AppWrapper.state('events')).toHaveLength(2);
     AppWrapper.unmount();
   })
 
