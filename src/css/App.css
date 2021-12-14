@@ -17,15 +17,11 @@ p {
   margin: 5px 0;
 }
 
-.display-none {
-  display: none;
-}
-.showSuggestions {
+.event-details-button {
   display: block;
 }
 
-input[type="text"],
-input[type="number"] {
+input {
   padding: 8px 6px 8px 10px;
   border-radius: 4px;
   outline: none;
@@ -85,7 +81,7 @@ input[type="number"] {
   position: relative;
 }
 
-.details-btn {
+.event__details-button {
   position: absolute;
   right: 5px;
   bottom: 5px;
@@ -95,26 +91,16 @@ input[type="number"] {
   cursor: pointer;
 }
 
-.name {
+.event__name {
   font-size: 18px;
   font-weight: 600;
 }
 
-.group-name {
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-.going,
-.visibility {
-  font-style: italic;
-}
-
-.description {
+.event__more-details__description {
   overflow-x: hidden;
 }
 
-.numberOfEvents {
+.number-of-events {
   width: 200px;
   margin: 20px auto;
   text-align: center;
