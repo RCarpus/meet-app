@@ -30,6 +30,7 @@ class CitySearch extends Component {
 
     return (
       <div className="citySearch">
+        <label for={this.state.query}>Search for a city</label>
         <input type="text"
           className="city"
           value={this.state.query}
