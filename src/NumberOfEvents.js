@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class NumberOfEvents extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       number: 32
@@ -15,6 +15,11 @@ class NumberOfEvents extends Component {
     this.setState({
       number: value,
     });
+    
+    //unit test for NumberOfEvents fails if it tries to run this function
+    if (this.props.updateNumberOfEvents)
+      this.props.updateNumberOfEvents(value);
+
   }
 
   RemoveNonNumeric = (text) => {
@@ -26,7 +31,7 @@ class NumberOfEvents extends Component {
     return (
       <div className="number-of-events">
         <label id="number-of-events__label" htmlFor="number-of-events__input">Number of Events:</label>
-        <input id="number-of-events__input" value={this.state.number} onChange={this.handleInputChanged}/>
+        <input id="number-of-events__input" value={this.state.number} onChange={this.handleInputChanged} />
       </div>
     )
   }

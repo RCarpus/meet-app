@@ -68,4 +68,40 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   })
 
+  /* Specify number of events */
+
+  test('The state of "numberOfEvents" within App changes when number input changes', async () => {
+    const AppWrapper = mount(<App />);
+    const numberInput = AppWrapper.find(NumberOfEvents).find('#number-of-events__input');
+    const eventObject = { target: { value: '15' } };
+    numberInput.at(0).simulate('change', eventObject);
+    expect(AppWrapper.state('numberOfEvents')).toBe('15');
+    AppWrapper.unmount();
+  })
+
+  test('The EventList is passed a list of events that is not longer than the App\'s state.numberOfEvents', async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.setState({ 'numberOfEvents': 1 });
+    await getEvents();
+    expect(AppWrapper.state('events')).toHaveLength(1);
+    AppWrapper.unmount();
+  })
+
+  test('When the specified number of events is greater than the number of available events, all events show', async () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.setState({ 'numberOfEvents': 55 });
+    await getEvents();
+    expect(AppWrapper.state('events')).toHaveLength(2);
+    AppWrapper.unmount();
+  })
+
+  test('When the number of events field changes, the number of events changes', async () => {
+    const AppWrapper = mount(<App />);
+    const numberInput = AppWrapper.find(NumberOfEvents).find('#number-of-events__input');
+    const eventObject = { target: { value: '1' } };
+    await numberInput.at(0).simulate('change', eventObject);
+    expect(AppWrapper.state('events')).toHaveLength(1);
+    AppWrapper.unmount();
+  })
+
 });
