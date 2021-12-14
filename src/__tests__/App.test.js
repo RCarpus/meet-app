@@ -69,6 +69,11 @@ describe('<App /> integration', () => {
   })
 
   /* Specify number of events */
+  test('The number of events loaded initially should be 32', async () => {
+    const AppWrapper = mount(<App />);
+    expect(AppWrapper.state('numberOfEvents')).toBe('32');
+    AppWrapper.unmount();
+  })
 
   test('The state of "numberOfEvents" within App changes when number input changes', async () => {
     const AppWrapper = mount(<App />);
