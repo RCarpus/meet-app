@@ -1,13 +1,8 @@
 import { loadFeature, defineFeature } from "jest-cucumber";
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-
-import { mockData } from "../mock-data";
-import { extractLocations } from "../api";
-const locations = extractLocations(mockData);
+import { mount } from 'enzyme';
 
 import App from '../App';
-import CitySearch from "../CitySearch";
 
 // loadFeature expects file path to start from project root
 const feature = loadFeature('./src/features/specifyNumberOfEvents.feature');
@@ -26,7 +21,6 @@ defineFeature(feature, test => {
     then(/^(\d+) events should be displayed.$/, (arg0) => {
       expect(AppWrapper.find('.event')).toHaveLength(2);
     });
-
 
   });
 
