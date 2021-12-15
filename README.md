@@ -37,8 +37,11 @@ The user interface is made responsive using CSS grid with media queries altering
 ## Testing
 ### Unit Testing and Integration Testing
 Unit testing and integration testing are performed using Jest. Test files are contained in the __tests__ subdirectory. 
-### End-to-end testing and Acceptance testing
-End-to-end and acceptance are to be implemented soon.
+### Acceptance testing
+Acceptance test is performed using [Jest-Cucumber](https://www.npmjs.com/package/jest-cucumber). Jest-Cucumber was selected over the standard Cucumber because it allows for writing tests using similar syntax to our unit testing and integration testing with Jest. Test and feature files are contained in the 'features' subdirectory.
+
+### End-to-end testing
+End-to-end testing for Feature 2: Show/hide an event's details was performed using [Puppeteer](https://github.com/puppeteer/puppeteer#usage).
 
 ## User Stories and Requirements
 ### FEATURE 1: FILTER EVENTS BY CITY
