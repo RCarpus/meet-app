@@ -43,6 +43,9 @@ Acceptance test is performed using [Jest-Cucumber](https://www.npmjs.com/package
 ### End-to-end testing
 End-to-end testing for Feature 2: Show/hide an event's details was performed using [Puppeteer](https://github.com/puppeteer/puppeteer#usage).
 
+### Performance monitoring
+I used [Atatus](https://www.atatus.com/for/react) to peform performance monitoring for the app. 
+
 ## User Stories and Requirements
 ### FEATURE 1: FILTER EVENTS BY CITY
 **User Story**: As a user, I should be able to filter the events by city so that I can see the list of events that take place near that city.  
