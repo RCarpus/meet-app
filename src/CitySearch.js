@@ -18,15 +18,16 @@ class CitySearch extends Component {
     });
   }
 
-  handleSuggestionClicked = (suggestion) => {
+  handleSuggestionClicked = (suggestion, number) => {
     this.setState({
       query: suggestion,
       showSuggestions: false
     });
-    this.props.updateEvents(suggestion);
+    this.props.updateEvents(suggestion, number);
   }
 
   render() {
+    const { numberOfEvents } = this.props;
 
     return (
       <div className="citySearch">
@@ -39,9 +40,9 @@ class CitySearch extends Component {
         />
         <ul className="suggestions" style={this.state.showSuggestions ? {} : {display: 'none' }}>
           {this.state.suggestions.map((suggestion) => (
-            <li key={suggestion} onClick={() => this.handleSuggestionClicked(suggestion)}>{suggestion}</li>
+            <li key={suggestion} onClick={() => this.handleSuggestionClicked(suggestion, numberOfEvents)}>{suggestion}</li>
           ))}
-          <li key="all" onClick={() => this.handleSuggestionClicked("all")}>
+          <li key="all" onClick={() => this.handleSuggestionClicked("all", numberOfEvents)}>
             <b >See all cities</b>
           </li>
         </ul>
