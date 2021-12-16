@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ErrorAlert } from './alert';
+import { ErrorAlert, WarningAlert } from './alert';
 
 class NumberOfEvents extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class NumberOfEvents extends Component {
 
     this.state = {
       number: 32,
-      errorText: ''
+      displayErrorText: null
     };
   }
 
@@ -19,12 +19,12 @@ class NumberOfEvents extends Component {
       console.log('clenaed avlue again', cleanedValue);
       this.setState({
         number: cleanedValue,
-        errorText: 'Number of Events must be a non-negative integer'
+        displayErrorText: true
       })
     } else {
       this.setState({
         number: cleanedValue,
-        errorText: ''
+        displayErrorText: false
       });
     }
 
@@ -39,10 +39,17 @@ class NumberOfEvents extends Component {
 
 
   render() {
+    const { currentNumberOfEvents } = this.props;
+    const { number, displayErrorText } = this.state;
+    const displayWarning = currentNumberOfEvents < number;
+    const warningText = 'There are not that many events available';
+    const errorText = 'Number of Events must be a non-negative integer';
     return (
       <div className="number-of-events">
         <div className="number-of-events__error">
-          <ErrorAlert text={this.state.errorText} />
+          { displayWarning && <WarningAlert text={warningText} />}
+          { displayErrorText && <ErrorAlert text={errorText} /> }
+          
         </div>
         <div className="number-of-events__grid">
           <label id="number-of-events__label" htmlFor="number-of-events__input">Number of Events:</label>

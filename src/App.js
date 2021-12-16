@@ -30,7 +30,7 @@ class App extends React.Component {
     this.mounted = false;
   }
 
-  updateEvents = (location='all', number=this.state.numberOfEvents) => {
+  updateEvents = (location = 'all', number = this.state.numberOfEvents) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events.slice(0, number) :
@@ -59,7 +59,7 @@ class App extends React.Component {
           <p>This app uses the Google Calendar API in conjunction with a CareerFoundry calendar to fetch and filter events based on the city and number of events desired. Give it a try!</p>
         </div>
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} />
+        <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length}/>
         <EventList events={events} numberOfEvents={numberOfEvents} />
       </div >
     );
