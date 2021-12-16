@@ -1,6 +1,6 @@
 :root {
-  --bg-color-1: rgb(0, 211, 226);
-  --bg-color-2: rgb(0, 36, 240);
+  --bg-color-1: rgba(0, 211, 226, 0.705);
+  --bg-color-2: rgba(0, 36, 240, 0.384);
   --bg-color-event: rgba(255, 255, 255, 0.925);
   --bg-color-suggestion: rgb(175, 175, 175);
   --bg-color-suggestion-hover: white;
@@ -31,10 +31,22 @@ h1 {
   font-size: 36px;
 }
 
-.citySearch, .number-of-events {
+.citySearch {
+  width: 100%;
+}
+
+.citySearch__grid, .number-of-events__grid {
   margin: 5px;
   display: grid;
   grid-template-columns: 150px 150px;
+}
+
+.citySearch__alert, .number-of-events__error {
+  width: 90%;
+  font-size: 14px;
+  text-align: center;
+  margin: auto;
+  height: 2.5em;
 }
 
 label {
@@ -79,9 +91,14 @@ li {
   li {
     width: 500px;
   }
-  .citySearch, .number-of-events {
+  .citySearch__grid, .number-of-events__grid {
     width: 60%;
     margin: auto;
+  }
+
+  .citySearch__alert, .number-of-events__error {
+    width: 500px;
+    margin-left: 20%;
   }
 
 }
