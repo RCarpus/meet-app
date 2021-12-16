@@ -7,6 +7,11 @@ class EventList extends Component {
 
     return (
       <ul className="EventList">
+        {events.length === 0 && 
+          <div>
+            <h2>Loading...</h2>
+            <p>(or you've set the number of events to 0. But you wouldn't want to do that, would you?)</p>
+          </div>}
         {events.map(event => 
           <li key={event.id}>
             <Event event={event} />
