@@ -23,6 +23,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "rgba(0, 211, 226, 0.705)",
-  "background_color": "rgba(0, 211, 226, 0.705)"
+  "theme_color": "#00d3e2b4",
+  "background_color": "#00d3e2b4"
 }
