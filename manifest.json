@@ -21,7 +21,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://rcarpus.github.io/meet-app/",
   "display": "standalone",
   "theme_color": "#00d3e2b4",
   "background_color": "#00d3e2b4"
