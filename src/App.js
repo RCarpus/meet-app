@@ -4,15 +4,17 @@ import './css/nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { extractLocations, getEvents } from './api';
 import { WarningAlert } from './alert';
+import { WelcomeScreen } from './WelcomeScreen';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends React.Component {
   state = {
     events: [],
     locations: [],
     numberOfEvents: '32',
-    location: 'all'
+    location: 'all',
+    showWelcomeScreen: undefined
   };
 
   componentDidMount() {
@@ -53,15 +55,17 @@ class App extends React.Component {
 
   render() {
     const { events, locations, numberOfEvents } = this.state;
+    if (this.state.showWelcomeScreen === undefined ) return <div className="App" />
+    
     return (
       <div className="App">
         <div id="App__header">
           <h1>Search for tech events</h1>
           <p>This app uses the Google Calendar API in conjunction with a CareerFoundry calendar to fetch and filter events based on the city and number of events desired. Give it a try!</p>
-          {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} /> }
+          {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
         </div>
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length}/>
+        <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
         <EventList events={events} numberOfEvents={numberOfEvents} />
       </div >
     );
