@@ -1,15 +1,17 @@
 import React from "react";
-import '.css/WelcomeScreen.css';
+import './css/WelcomeScreen.css';
 function WelcomeScreen(props) {
   return props.showWelcomeScreen ?
     (
       <div className="WelcomeScreen">
-        <h1>Welcome to the Meet app</h1>
-        <h4>
-          Log in to see upcoming events around the world for
-          full-stack
-          developers
-        </h4>
+        <div className="WelcomeScreen__text">
+          <h1>Welcome to the Meet app</h1>
+          <h4>
+            Log in to see upcoming events around the world for
+            full-stack
+            developers
+          </h4>
+        </div>
         <div className="button_cont" align="center">
           <div class="google-btn">
             <div class="google-icon-wrapper">
@@ -25,12 +27,12 @@ function WelcomeScreen(props) {
             >
               <b>Sign in with google</b>
             </button>
-            Page 1
           </div>
         </div>
         <a
           href="https://rcarpus.github.io/meet-app/privacy.html"
           rel="nofollow noopener"
+          className="WelcomeScreen__privacy-policy"
         >
           Privacy policy
         </a>
