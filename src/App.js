@@ -69,7 +69,6 @@ class App extends React.Component {
 
   render() {
     const { events, locations, numberOfEvents } = this.state;
-    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
 
     return (
       <div className="App">
@@ -81,7 +80,7 @@ class App extends React.Component {
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
         <EventList events={events} numberOfEvents={numberOfEvents} />
-        { navigator.onLine && <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />}
+        {navigator.onLine && <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />}
       </div >
     );
   }
