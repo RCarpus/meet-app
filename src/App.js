@@ -6,6 +6,9 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { WarningAlert } from './alert';
 import WelcomeScreen from './WelcomeScreen';
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends React.Component {
@@ -92,9 +95,24 @@ class App extends React.Component {
     }, this.updateEvents(this.state.location, numberOfEvents));
   }
 
+  getData = () => {
+    /**
+     * Create a data set to use for data visualization.
+     * Extracts an array of cities/number pairs from locations and events
+     */
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location).length;
+      const city = location.split(', ').shift();
+      return { city, number };
+    })
+    return data;
+  }
+
 
   render() {
     const { events, locations, numberOfEvents } = this.state;
+    const chartData = this.getData();
 
     return (
       <div className="App">
@@ -110,6 +128,17 @@ class App extends React.Component {
         {/* These are my input fields */}
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
+
+        <ResponsiveContainer height={400} >
+          <ScatterChart 
+            margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="city" name="City" type="category" />
+            <YAxis dataKey="number" name="Number of Events" allowDecimals={false} />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Scatter data={chartData} fill="#8884d8" />
+          </ScatterChart>
+        </ResponsiveContainer>
 
         {/* Renders event cards */}
         <EventList events={events} numberOfEvents={numberOfEvents} />
