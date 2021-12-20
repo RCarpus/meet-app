@@ -1,6 +1,6 @@
 # meet-app
 ## Overview
-Meet app is React app coded using a test-driven development process. The app uses the Google Calendar API to fetch upcoming events from a a CareerFoundry events calendar.  
+Meet app is a Progressive Web App (PWA) built with React and coded using a test-driven development process. The app uses the Google Calendar API to fetch upcoming events from a a CareerFoundry events calendar.  
 
 To connect to the api, the app makes use of Amazon Web Service's Lambda service to perform authentication. Because this app is in test mode, a new user must have their gmail account added to my test users lists from my Google Console. If you would like to have access to the app, please reach out to me so I can grant you access. The new user will be redirected to the Google Oauth authentication screen where they must confirm that they want to give permissions to the Google Calendar API. One permission is granted, the user is redirected to the application.
 
@@ -45,6 +45,9 @@ End-to-end testing for Feature 2: Show/hide an event's details was performed usi
 
 ### Performance monitoring
 I used [Atatus](https://www.atatus.com/for/react) to peform performance monitoring for the app. 
+
+## Offline features (PWA)
+Because this is a Progessive Web App, users can install the app to their home screens on desktop and mobile. Because the code is then saved on the device, limited functionality is still available when offline. This app has been built to allow users to the view the most recent events they have queried while offline. This is achieved by storing event data in localStorage with each GET request to the Google Calendar API.
 
 ## User Stories and Requirements
 ### FEATURE 1: FILTER EVENTS BY CITY
