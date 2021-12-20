@@ -34,6 +34,9 @@ The `<App>` element calls `getEvents()` from with its `componentDidMount()` meth
 
 The user interface is made responsive using CSS grid with media queries altering the width of the event cards and number of columns based on the screen size.
 
+## Data visualization
+Data visualization is handled with the [Recharts](https://recharts.org/en-US/examples/SimpleLineChart) library, which offers easy-to-use template components for a variety of data visualizations to be used in React apps. This Meet App utilizes the [SimpleScatterChart](https://recharts.org/en-US/examples/SimpleScatterChart) and [PieChart](https://recharts.org/en-US/examples/TwoLevelPieChart) to visualize the number of events in each city and the types of events offered.
+
 ## Testing
 ### Unit Testing and Integration Testing
 Unit testing and integration testing are performed using Jest. Test files are contained in the __tests__ subdirectory. 
