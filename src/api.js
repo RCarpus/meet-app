@@ -16,7 +16,7 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
   /**
    * Send access token to the google API server.
    * If the token is valid, get a json response.
@@ -73,6 +73,11 @@ export const getEvents = async () => {
    * We use the mock data when we are testing on localhost,
    * but we use the real API data when we are live.
    */
+  if (!navigator.onLine) {
+    const data = localStorage.getItem('lastEvents');
+    return data?JSON.parse(data).events:[];;
+  }
+
   NProgress.start(); //This is a loading bar libray
 
   //Return mock data while testing
