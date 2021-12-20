@@ -51,7 +51,7 @@ function WelcomeScreen(props) {
             used within the application, and personal calendars aren’t accessed.
           </p>
           <p>
-            If you'd like to see more of my work, please visit <a href="http://rcarpus.github.io" target={"_blank"}>my portfolio site at rcarpus.github.io</a>.
+            If you'd like to see more of my work, please visit <a href="http://rcarpus.github.io" target={"_blank"} rel="noreferrer">my portfolio site at rcarpus.github.io</a>.
           </p>
         </div>
 
