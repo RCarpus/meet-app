@@ -20,7 +20,7 @@ class App extends React.Component {
   async componentDidMount() {
     this.mounted = true;
     // Only attempt to access Google API if online
-    if (navigator.onLine) {
+    if (navigator.onLine & !window.location.href.startsWith('http://localhost')) {
       // If we have an access token saved, check to see if it's valide
       const accessToken = localStorage.getItem('access_token');
       const tokenIsValid = (await checkToken(accessToken)).error ? false : true;
@@ -43,7 +43,14 @@ class App extends React.Component {
     }
     // If offline, skip to getEvents. This function grabs from localStorage when offline.
     else {
-      getEvents();
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events: events.slice(0, this.state.numberOfEvents),
+            locations: extractLocations(events)
+          });
+        }
+      });
     }
   }
 

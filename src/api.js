@@ -73,18 +73,18 @@ export const getEvents = async () => {
    * We use the mock data when we are testing on localhost,
    * but we use the real API data when we are live.
    */
+
+  //Return mock data while testing
+  if (window.location.href.startsWith('http://localhost')) {
+    return mockData;
+  } 
+
   if (!navigator.onLine) {
     const data = localStorage.getItem('lastEvents');
     return data?JSON.parse(data).events:[];;
   }
 
   NProgress.start(); //This is a loading bar libray
-
-  //Return mock data while testing
-  if (window.location.href.startsWith('http://localhost')) {
-    NProgress.done();
-    return mockData;
-  } 
 
   const token = await getAccessToken();
 
