@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  PieChart, Pie, ResponsiveContainer
+  PieChart, Pie, Cell, ResponsiveContainer
 } from 'recharts';
 
 const EventGenre = ({ events }) => {
@@ -24,10 +24,12 @@ const EventGenre = ({ events }) => {
     return data.filter(genre => {return genre.value > 0 });
   }
 
+  const colors = ['red', 'orange', 'yellow', 'green', 'purple'];
+
   console.log(getData());
 
   return (
-    <ResponsiveContainer height={400} >
+    <ResponsiveContainer height={400} width="99%">
       <PieChart width={400} height={400}>
         <Pie
           data={data}
@@ -38,7 +40,9 @@ const EventGenre = ({ events }) => {
           fill="#8884d8"
           dataKey="value"
           label={({ name, value }) => `${name}: ${(value)}`}>
-
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index]} />
+            ))}
           </Pie>
       </PieChart>
     </ResponsiveContainer>
