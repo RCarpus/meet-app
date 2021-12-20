@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    top: 0;
+    top: 80px;
     background: #00d3e2;
 }
 
@@ -76,4 +76,9 @@
   width: 50%;
   margin: auto;
   text-align: center;
+}
+
+.WelcomeScreen__app-info {
+  max-width: 750px;
+  margin: auto;
 }
