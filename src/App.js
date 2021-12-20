@@ -19,12 +19,17 @@ class App extends React.Component {
 
   async componentDidMount() {
     this.mounted = true;
+    // Only attempt to access Google API if online
     if (navigator.onLine) {
+      // If we have an access token saved, check to see if it's valide
       const accessToken = localStorage.getItem('access_token');
       const tokenIsValid = (await checkToken(accessToken)).error ? false : true;
+      // If we were redirected from google login page, we will have a code in the URL
       const searchParams = new URLSearchParams(window.location.search);
       const code = searchParams.get('code');
+      // show the welcome screen if we are missing a valid code or token
       this.setState({ showWelcomeScreen: !(code || tokenIsValid) });
+      // If we have a code an valid token, use them to get events
       if ((code || tokenIsValid) && this.mounted) {
         getEvents().then((events) => {
           if (this.mounted) {
@@ -36,11 +41,10 @@ class App extends React.Component {
         });
       }
     }
+    // If offline, skip to getEvents. This function grabs from localStorage when offline.
     else {
       getEvents();
     }
-
-
   }
 
   componentWillUnmount() {
@@ -48,6 +52,15 @@ class App extends React.Component {
   }
 
   updateEvents = (location = 'all', number = this.state.numberOfEvents) => {
+    /**
+     * Expects a location (or "all") and a number.
+     * Gets events, filters the event list by city name,
+     * reduces the number of events based on the specified number,
+     * and sets App state with new events list.
+     * 
+     * Function is called from CitySearch directly
+     * and by NumberOfEvents indirectly (through updateNumberOfEvents)
+     */
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events.slice(0, number) :
@@ -61,6 +74,12 @@ class App extends React.Component {
   }
 
   updateNumberOfEvents = (numberOfEvents) => {
+    /**
+     * Function called by NumberOfEvents.
+     * 
+     * Sets the App numberOfEvents state based on the input field
+     * THEN calls updateEvents with the current location and new numberOfEvents
+     */
     this.setState({
       numberOfEvents
     }, this.updateEvents(this.state.location, numberOfEvents));
@@ -75,11 +94,20 @@ class App extends React.Component {
         <div id="App__header">
           <h1>Search for tech events</h1>
           <p>This app uses the Google Calendar API in conjunction with a CareerFoundry calendar to fetch and filter events based on the city and number of events desired. Give it a try!</p>
+
+          {/* Show a warning message when the user is offline. */}
           {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
+
         </div>
+
+        {/* These are my input fields */}
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
+
+        {/* Renders event cards */}
         <EventList events={events} numberOfEvents={numberOfEvents} />
+
+        {/* Welcome screen covers up everything else when active. This is triggered when user is not signed in. */}
         {navigator.onLine && <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />}
       </div >
     );
