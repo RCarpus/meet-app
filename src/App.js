@@ -129,16 +129,18 @@ class App extends React.Component {
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
 
-        <ResponsiveContainer height={400} >
-          <ScatterChart 
-            margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="city" name="City" type="category" />
-            <YAxis dataKey="number" name="Number of Events" allowDecimals={false} />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter data={chartData} fill="#8884d8" />
-          </ScatterChart>
-        </ResponsiveContainer>
+        <div className="App__charts">
+          <ResponsiveContainer height={400} >
+            <ScatterChart
+              margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+              <CartesianGrid strokeDasharray="3 3" fill="#ffffff" />
+              <XAxis dataKey="city" name="City" type="category" />
+              <YAxis dataKey="number" name="Number of Events" allowDecimals={false} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter data={chartData} fill="#000000" />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
 
         {/* Renders event cards */}
         <EventList events={events} numberOfEvents={numberOfEvents} />
