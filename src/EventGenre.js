@@ -5,9 +5,6 @@ import {
 
 const EventGenre = ({ events }) => {
 
-  useEffect(() => { setData(() => getData()); }, [events]);
-  const [data, setData] = useState([]);
-
   const getData = () => {
     /**
      * returns an array of objects with keys { name, value }
@@ -21,8 +18,11 @@ const EventGenre = ({ events }) => {
       return { name: genre, value: numEvents };
     });
     // We only want genres that have at least one event for them
-    return data.filter(genre => {return genre.value > 0 });
+    return data.filter(genre => { return genre.value > 0 });
   }
+  
+  useEffect(() => { setData(() => getData()); }, [events]);
+  const [data, setData] = useState([]);
 
   const colors = ['red', 'orange', 'yellow', 'green', 'purple'];
 
@@ -40,10 +40,10 @@ const EventGenre = ({ events }) => {
           fill="#8884d8"
           dataKey="value"
           label={({ name, value }) => `${name}: ${(value)}`}>
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index]} />
-            ))}
-          </Pie>
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]} />
+          ))}
+        </Pie>
       </PieChart>
     </ResponsiveContainer>
   )
