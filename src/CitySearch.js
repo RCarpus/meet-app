@@ -10,25 +10,29 @@ class CitySearch extends Component {
   }
 
   handleInputChanged = (event) => {
-    // const value = event.target.value;
-    // const suggestions = this.props.locations.filter((location) => {
-    //   return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-    // });
-    // this.setState({
-    //   query: event.target.value,
-    //   suggestions
-    // });
+    /**
+     * takes the text written in the suggestion box,
+     * filters the list of locations against that text.
+     * sets an info message if no suggestions are found
+     */
+
+    // Get value from input field
     const value = event.target.value;
+
+    // render suggestions box (this is set to false by handleSuggestionClicked)
     this.setState({ showSuggestions: true });
+    // Filter the locations list against the text input
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
+    // if no suggestions, set text for info box
     if (suggestions.length === 0) {
       this.setState({
         query: value,
         infoText: 'We can not find the city you are looking for. Please try another city',
       });
     } else {
+      // turns off info text if it was defined, sets suggestions in state
       return this.setState({
         query: value,
         suggestions,
@@ -38,6 +42,11 @@ class CitySearch extends Component {
   }
 
   handleSuggestionClicked = (suggestion, number) => {
+    /**
+     * When a user clicks on a suggestion, updateEvents based on the
+     * suggestion and the current selected number of events,
+     * and hide the suggestions list
+     */
     this.setState({
       query: suggestion,
       showSuggestions: false,
@@ -47,11 +56,12 @@ class CitySearch extends Component {
   }
 
   render() {
-    const { numberOfEvents } = this.props;
+    const { numberOfEvents } = this.props; // This is used in updateEvents within handleSuggestionClicked
 
     return (
       <div className="citySearch">
         <div className="citySearch__alert">
+          {/* Renders when no matching city has been found */}
           <InfoAlert text={this.state.infoText} />
         </div>
         

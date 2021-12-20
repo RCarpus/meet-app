@@ -33,6 +33,7 @@ class Event extends Component {
           <span className='event__title-line-2__city'>{event.location}</span>
         </p>
 
+        {/* expanded toggled by the '.event__details-button' */}
         {expanded &&
           <div className='event__more-details' >
             <h3 className='event__more-details__about-label'>About event</h3>

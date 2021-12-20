@@ -3,9 +3,6 @@ import axios from 'axios';
 import NProgress from 'nprogress';
 
 /**
- *
- * @param {*} events:
- * The following function should be in the “api.js” file.
  * This function takes an events array, then uses map to create a new array with only locations.
  * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
  * The Set will remove all duplicates from the array.
@@ -79,6 +76,7 @@ export const getEvents = async () => {
     return mockData;
   } 
 
+  // Return events saved in localStorage if we are offline
   if (!navigator.onLine) {
     const data = localStorage.getItem('lastEvents');
     return data?JSON.parse(data).events:[];;
@@ -86,6 +84,7 @@ export const getEvents = async () => {
 
   NProgress.start(); //This is a loading bar libray
 
+  // We are online so we go through the verification steps to download new events
   const token = await getAccessToken();
 
   if (token) {
@@ -93,6 +92,7 @@ export const getEvents = async () => {
     const url = `https://hv2altwv0j.execute-api.us-east-1.amazonaws.com/dev/api/get-calendar-events/${token}`;
     const result = await axios.get(url);
     if (result.data) {
+      // Storing data in localStorage to use when offline
       var locations = extractLocations(result.data.events);
       localStorage.setItem('lastEvents', JSON.stringify(result.data));
       localStorage.setItem('locations', JSON.stringify(locations));
