@@ -9,6 +9,7 @@ import WelcomeScreen from './WelcomeScreen';
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
+import EventGenre from './EventGenre';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends React.Component {
@@ -130,7 +131,9 @@ class App extends React.Component {
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
 
         <div className="App__charts">
+          <EventGenre events={events}/>
           <ResponsiveContainer height={400} >
+
             <ScatterChart
               margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
               <CartesianGrid strokeDasharray="3 3" fill="#ffffff" />
