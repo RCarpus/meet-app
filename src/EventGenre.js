@@ -24,17 +24,17 @@ const EventGenre = ({ events }) => {
   useEffect(() => { setData(() => getData()); }, [events]);
   const [data, setData] = useState([]);
 
-  const colors = ['red', 'orange', 'yellow', 'green', 'purple'];
+  const colors = ['red', 'orange', 'purple', 'green', 'blue'];
 
   console.log(getData());
 
   return (
-    <ResponsiveContainer height={400} width="99%">
-      <PieChart width={400} height={400}>
+    <ResponsiveContainer height={300} width="99%">
+      <PieChart width={400} height={300}>
         <Pie
           data={data}
           cs={200}
-          cy={200}
+          cy={150}
           labelLine={false}
           outerRadius={80}
           fill="#8884d8"

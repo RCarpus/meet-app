@@ -117,28 +117,30 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div id="App__header">
-          <h1>Search for tech events</h1>
-          <p>This app uses the Google Calendar API in conjunction with a CareerFoundry calendar to fetch and filter events based on the city and number of events desired. Give it a try!</p>
+        <div className="App__inputs-wrapper">
+          <div className="App__inputs-wrapper__header">
+            <h2>Select a city near you</h2>
 
-          {/* Show a warning message when the user is offline. */}
-          {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
+            {/* Show a warning message when the user is offline. */}
+            {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
+
+          </div>
+
+          {/* These are my input fields */}
+          <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
+          <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
 
         </div>
-
-        {/* These are my input fields */}
-        <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
 
         <div className="App__charts">
           <div className="App__charts__pie">
             <EventGenre events={events} />
           </div>
           <div className="App__charts__scatter">
-            <ResponsiveContainer height={400} width="99%">
+            <ResponsiveContainer height={300} width="99%">
               <ScatterChart
                 margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" fill="#ffffff" />
+                <CartesianGrid strokeDasharray="3 3" fill="#ebebeb" />
                 <XAxis dataKey="city" name="City" type="category" />
                 <YAxis dataKey="number" name="Number of Events" allowDecimals={false} />
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />

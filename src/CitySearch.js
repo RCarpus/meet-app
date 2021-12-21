@@ -66,12 +66,13 @@ class CitySearch extends Component {
         </div>
         
         <div className="citySearch__grid">
-          <label htmlFor={this.state.query}>Search for a city</label>
+          <label htmlFor={this.state.query}>Search for a city:</label>
           <input type="text"
             className="city"
             value={this.state.query}
             onChange={this.handleInputChanged}
             onFocus={() => { this.setState({ showSuggestions: true }) }}
+            placeholder="Search.."
           />
 
           <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }}>

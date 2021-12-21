@@ -4,6 +4,7 @@
   --bg-color-event: rgba(255, 255, 255, 0.925);
   --bg-color-suggestion: rgb(175, 175, 175);
   --bg-color-suggestion-hover: white;
+  --bg-color-scatter: #ebebeb;
 }
 
 html {
@@ -21,14 +22,30 @@ body {
   background-attachment: fixed;
 }
 
-#App__header {
+.App__inputs-wrapper {
+  background-color: var(--bg-color-event);
+  max-width: 600px;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 30px;
+  border: solid black 2px;
+  border-radius: 10px;
+}
+
+.App__inputs-wrapper__header {
   max-width: 500px;
   margin: auto;
+  margin-top: 80px;
   text-align: center;
 }
 
 h1 {
   font-size: 36px;
+}
+
+.App__charts {
+  background-color: var(--bg-color-event);
+  
 }
 
 .citySearch {
@@ -82,6 +99,18 @@ li {
   box-shadow: 5px 10px rgba(0, 0, 0, 0.288);
 }
 
+.suggestions {
+  position: absolute;
+  z-index: 90;
+  left: 20%;
+  top: 195px;
+
+}
+
+.suggestions :hover {
+  cursor: pointer;
+}
+
 .suggestions > li {
   background-color: var(--bg-color-suggestion);
   border: none;
@@ -105,13 +134,16 @@ li {
   }
   .citySearch__grid, .number-of-events__grid {
     width: 60%;
-    margin: auto;
   }
 
   .citySearch__alert, .number-of-events__error{
     width: 500px;
-    margin-left: 20%;
   }
+
+  .suggestions {
+    top: 165px;
+    left: 47%;
+    }
 
 }
 
