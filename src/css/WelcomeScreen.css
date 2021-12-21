@@ -2,11 +2,19 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    top: 80px;
+    top: 0;
     background: #00d3e2;
 }
 
-.WelcomeScreen__text {
+.WelcomeScreen__content {
+  background-color: white;
+  padding-top: 80px;
+  max-width: 1000px;
+  height: 100%;
+  margin: auto;
+}
+
+.WelcomeScreen__content__heading {
   width: 90%;
   margin: auto;
   text-align: center;
@@ -81,4 +89,5 @@
 .WelcomeScreen__app-info {
   max-width: 750px;
   margin: auto;
+  padding: 10px;
 }

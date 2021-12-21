@@ -6,6 +6,10 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { WarningAlert } from './alert';
 import WelcomeScreen from './WelcomeScreen';
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
+import EventGenre from './EventGenre';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends React.Component {
@@ -92,24 +96,60 @@ class App extends React.Component {
     }, this.updateEvents(this.state.location, numberOfEvents));
   }
 
+  getData = () => {
+    /**
+     * Create a data set to use for data visualization.
+     * Extracts an array of cities/number pairs from locations and events
+     */
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location).length;
+      const city = location.split(', ').shift();
+      return { city, number };
+    })
+    return data;
+  }
+
 
   render() {
     const { events, locations, numberOfEvents } = this.state;
+    const chartData = this.getData();
 
     return (
       <div className="App">
-        <div id="App__header">
-          <h1>Search for tech events</h1>
-          <p>This app uses the Google Calendar API in conjunction with a CareerFoundry calendar to fetch and filter events based on the city and number of events desired. Give it a try!</p>
+        <div className="App__inputs-wrapper">
+          <div className="App__inputs-wrapper__header">
+            <h2>Select a city near you</h2>
 
-          {/* Show a warning message when the user is offline. */}
-          {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
+            {/* Show a warning message when the user is offline. */}
+            {!navigator.onLine && <WarningAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
+
+          </div>
+
+          {/* These are my input fields */}
+          <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
+          <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
 
         </div>
 
-        {/* These are my input fields */}
-        <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length} />
+        <div className="App__charts">
+          <div className="App__charts__pie">
+            <EventGenre events={events} />
+          </div>
+          <div className="App__charts__scatter">
+            <ResponsiveContainer height={300} width="99%">
+              <ScatterChart
+                margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+                <CartesianGrid strokeDasharray="3 3" fill="#ebebeb" />
+                <XAxis dataKey="city" name="City" type="category" />
+                <YAxis dataKey="number" name="Number of Events" allowDecimals={false} />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={chartData} fill="#000000" />
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
+
+        </div>
 
         {/* Renders event cards */}
         <EventList events={events} numberOfEvents={numberOfEvents} />
