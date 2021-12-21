@@ -1,8 +1,7 @@
 import React from "react";
 import './css/WelcomeScreen.css';
 function WelcomeScreen(props) {
-  // return props.showWelcomeScreen ?
-  return true ?
+  return props.showWelcomeScreen ?
     (
       <div className="WelcomeScreen">
         <div className="WelcomeScreen__content">
