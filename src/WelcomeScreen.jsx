@@ -12,6 +12,7 @@ function WelcomeScreen(props) {
               full-stack
               developers
             </h4>
+            <p>This app is currently undergoing a verification process with Google. If you would like access to this app, please contact me at ryancarpus@gmail.com. I will need to add your email address to the allowed test users list.</p>
           </div>
           <div className="button_cont" align="center">
             <div className="google-btn">
